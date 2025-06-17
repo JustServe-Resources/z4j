@@ -10,7 +10,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lol.pbu.z4j.model.ArticleAttachmentResponse;
 import lol.pbu.z4j.model.ArticleAttachmentsResponse;
-import reactor.core.publisher.Mono;
 
 /**
  * @author Jonathan Zollinger

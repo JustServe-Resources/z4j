@@ -29,7 +29,6 @@ class ArticleAttachmentsClientTest extends Specification {
 
     def "create bulk attachments for an article"() {
         when: "uploading bulk attachments"
-        def article=new ArticleObject("en-US", null, "...")
         def response =articleAttachmentsClient.createAttachment()
         then: "verify 201 response"
         response.status()==HttpStatus.OK
