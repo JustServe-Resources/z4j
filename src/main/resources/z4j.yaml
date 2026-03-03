@@ -244,6 +244,33 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TicketUpdateResponse'
+  /api/v2/tickets/{ticket_id}/email_ccs:
+    get:
+      operationId: ListTicketEmailCCs
+      tags:
+        - Tickets
+      summary: List Email CCs for a Ticket
+      description: |-
+        Returns any users cc'd on the ticket.
+
+        #### Availability
+
+        The [CCs and Followers](https://support.zendesk.com/hc/en-us/articles/203690846) feature must be enabled in Zendesk Support.
+
+        If the feature is not enabled, the default CC functionality is used. In that case, use [List Collaborators](/api-reference/ticketing/tickets/tickets/#list-collaborators-for-a-ticket) to list the users cc'ed on the ticket.
+
+        #### Allowed For
+
+        * Agents
+      parameters:
+        - $ref: '#/components/parameters/TicketId'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTicketEmailCCsResponse'
   /api/v2/locales:
     get:
       operationId: ListLocales
@@ -293,7 +320,7 @@ paths:
         - name: start_time
           in: query
           required: false
-          description: | 
+          description: |
             You can use the incremental article endpoint to list all the articles that were updated since a certain date and time.
             This time is given as a <a href='https://www.epochconverter.com/'>Unix epoch timeStamp</a>
           schema:
@@ -1378,6 +1405,9 @@ components:
           type: array
           items:
             type: string
+    ListTicketEmailCCsResponse:
+      type: object
+      additionalProperties: true
     PostComment:
       type: object
       properties:
