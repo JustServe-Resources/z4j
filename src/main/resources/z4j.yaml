@@ -248,20 +248,17 @@ paths:
     get:
       operationId: ListTicketEmailCCs
       tags:
-        - Tickets
+        - Ticket
       summary: List Email CCs for a Ticket
       description: |-
-        Returns any users cc'd on the ticket.
-
-        #### Availability
-
-        The [CCs and Followers](https://support.zendesk.com/hc/en-us/articles/203690846) feature must be enabled in Zendesk Support.
-
-        If the feature is not enabled, the default CC functionality is used. In that case, use [List Collaborators](/api-reference/ticketing/tickets/tickets/#list-collaborators-for-a-ticket) to list the users cc'ed on the ticket.
-
-        #### Allowed For
-
-        * Agents
+        <p>Returns any users cc&#39;d on the ticket.</p>
+        <h4 id="availability">Availability</h4>
+        <p>The <a href="https://support.zendesk.com/hc/en-us/articles/203690846">CCs and Followers</a> feature must be enabled in Zendesk Support.</p>
+        <p>If the feature is not enabled, the default CC functionality is used. In that case, use {@link TicketsClient#listCollaborators(String) List Collaborators} to list the users cc&#39;ed on the ticket.</p>
+        <h4 id="allowed-for">Allowed For</h4>
+        <ul>
+          <li>Agents</li>
+        </ul>
       parameters:
         - $ref: '#/components/parameters/TicketId'
       responses:
@@ -271,6 +268,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListTicketEmailCCsResponse'
+  /api/v2/tickets/{ticket_id}/incidents:
+    get:
+      operationId: ListTicketIncidents
+      tags:
+        - Ticket
+      summary: List Ticket Incidents
+      description: |-
+        <h4 id="allowed-for">Allowed For</h4>
+        <ul>
+          <li>Agents</li>
+        </ul>
+      parameters:
+        - $ref: '#/components/parameters/TicketId'
+      responses:
+        "200":
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ListTicketIncidentsResponse'
   /api/v2/locales:
     get:
       operationId: ListLocales
@@ -1406,6 +1423,9 @@ components:
           items:
             type: string
     ListTicketEmailCCsResponse:
+      type: object
+      additionalProperties: true
+    ListTicketIncidentsResponse:
       type: object
       additionalProperties: true
     PostComment:
