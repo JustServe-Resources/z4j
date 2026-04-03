@@ -204,6 +204,28 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TicketCountResponse'
+  /api/v2/tickets/show_many:
+    get:
+      operationId: TicketsShowMany
+      tags:
+        - Ticket
+      summary: Show Multiple Tickets
+      description: |-
+        <p>Accepts a comma-separated list of ticket ids to return.</p>
+        <p>This endpoint will return up to 100 tickets records.</p>
+        <h4 id="allowed-for">Allowed For</h4>
+        <ul>
+          <li>Agents</li>
+        </ul>
+      parameters:
+        - $ref: '#/components/parameters/TicketIds'
+      responses:
+        "200":
+          description: List tickets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketsResponse'
   /api/v2/tickets/{ticket_id}:
     get:
       operationId: ShowTicket
