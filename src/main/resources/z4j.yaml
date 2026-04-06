@@ -204,6 +204,31 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TicketCountResponse'
+  /api/v2/tickets/create_many:
+    post:
+      operationId: TicketsCreateMany
+      tags:
+        - Tickets
+      summary: Create Many Tickets
+      description: |-
+        <p>Accepts an array of up to 100 ticket objects. <strong>Note</strong>: Every ticket created with this endpoint may be affected by your business rules, which can include sending email notifications to your end users. If you are importing historical tickets or creating more than 1000 tickets, consider using the <a href="/api-reference/ticketing/tickets/ticket_import/#ticket-bulk-import">Ticket Bulk Import</a> endpoint.</p>
+        <p>This endpoint returns a <code>job_status</code> <a href="/api-reference/ticketing/ticket-management/job_statuses/#json-format">JSON object</a> and queues a background job to do the work. Use the <a href="/api-reference/ticketing/ticket-management/job_statuses/#show-job-status">Show Job Status</a> endpoint to check for the job&#39;s completion. Only a certain number of jobs can be queued or running at the same time. See <a href="/api-reference/introduction/rate-limits/#job-limit">Job limit</a> for more information.</p>
+        <h4 id="allowed-for">Allowed For</h4>
+        <ul>
+          <li>Agents</li>
+        </ul>
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketsCreateRequest'
+      responses:
+        "200":
+          description: Create many tickets
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatusResponse'
   /api/v2/tickets/show_many:
     get:
       operationId: TicketsShowMany
@@ -1172,6 +1197,18 @@ components:
               type: string
             size:
               type: number
+    CreateResourceResult:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: the id of the new resource
+        index:
+          type: integer
+          description: the index number of the result
+      required:
+        - id
+        - index
     CustomField:
       type: object
       allOf:
@@ -1200,6 +1237,30 @@ components:
         type: text
         updated_at: "2022-09-07T23:22:00Z"
         url: https://company.zendesk.com/api/v2/custom_objects/car/fields/4398096842879.json
+    FailedResult:
+      type: object
+      properties:
+        action:
+          type: string
+          description: 'The action the job attempted (`"action": "update"`)'
+        details:
+          type: string
+          description: The details of the error
+        error:
+          type: string
+          description: The error message
+        id:
+          type: integer
+          description: The id of the resource the job attempted to update
+        success:
+          type: boolean
+          description: 'Whether the action was successful or not (`"success": true`)'
+      required:
+        - id
+        - action
+        - error
+        - success
+        - details
     TicketFieldCustomStatusObject:
       type: object
       properties:
@@ -1345,6 +1406,83 @@ components:
       properties:
         current_session:
           $ref: '#/components/schemas/HelpCenterSession'
+    JobStatusObject:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Automatically assigned when the job is queued
+          readOnly: true
+        job_type:
+          type: string
+          description: The type of the job
+          readOnly: true
+        message:
+          type: string
+          description: Message from the job worker, if any
+          nullable: true
+          readOnly: true
+        progress:
+          type: integer
+          description: Number of tasks that have already been completed
+          nullable: true
+          readOnly: true
+        results:
+          description: Result data from processed tasks. See [Results](#results) below
+          oneOf:
+            - type: array
+              items:
+                $ref: '#/components/schemas/JobStatusResultObject'
+              nullable: true
+            - type: object
+              properties:
+                success:
+                  type: boolean
+                  description: Whether the action was successful or not
+                  readOnly: true
+              required:
+                - success
+          readOnly: true
+        status:
+          type: string
+          description: 'The current status. One of the following: "queued", "working", "failed", "completed"'
+          readOnly: true
+        total:
+          type: integer
+          description: The total number of tasks this job is batching through
+          nullable: true
+          readOnly: true
+        url:
+          type: string
+          description: The URL to poll for status updates
+          readOnly: true
+      example:
+        id: 82de0b044094f0c67893ac9fe64f1a99
+        message: Completed at 2018-03-08 10:07:04 +0000
+        progress: 2
+        results:
+          - action: update
+            id: 244
+            status: Updated
+            success: true
+          - action: update
+            id: 245
+            status: Updated
+            success: true
+        status: completed
+        total: 2
+        url: https://example.zendesk.com/api/v2/job_statuses/82de0b0467893ac9fe64f1a99
+    JobStatusResponse:
+      type: object
+      properties:
+        job_status:
+          $ref: '#/components/schemas/JobStatusObject'
+    JobStatusResultObject:
+      oneOf:
+        - $ref: '#/components/schemas/CreateResourceResult'
+        - $ref: '#/components/schemas/UpdateResourceResult'
+        - $ref: '#/components/schemas/FailedResult'
+      additionalProperties: true
     Label:
       type: object
       properties:
@@ -2779,6 +2917,29 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/UnifiedSearchResult'
+    UpdateResourceResult:
+      type: object
+      properties:
+        action:
+          type: string
+          description: |
+            the action the job attempted (`"action": "update"`)
+        id:
+          type: integer
+          description: the id of the resource the job attempted to update
+        status:
+          type: string
+          description: |
+            the status (`"status": "Updated"`)
+        success:
+          type: boolean
+          description: |
+            whether the action was successful or not (`"success": true`)
+      required:
+        - id
+        - action
+        - success
+        - status
     UserSegment:
       type: object
       description: |
