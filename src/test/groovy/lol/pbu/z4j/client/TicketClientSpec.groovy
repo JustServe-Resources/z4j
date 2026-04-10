@@ -194,4 +194,26 @@ class TicketClientSpec extends Z4jSpec {
                 clientTestMatrix.findAll { !it.shouldSucceed && it.clientType != "simple user"}, [true, false, null], accountLocales
         ].combinations()
     }
+
+    def "calling listTicketEmailCCs() succeeds when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        when:
+        client.listTicketEmailCCs(tickets.get(0).getId()).block()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { it.shouldSucceed }
+    }
+
+    def "calling listTicketEmailCCs() fails when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        when:
+        client.listTicketEmailCCs(tickets.get(0).getId()).block()
+
+        then:
+        thrown(HttpClientException)
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { !it.shouldSucceed }
+    }
 }
