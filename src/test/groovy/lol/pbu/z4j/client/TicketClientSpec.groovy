@@ -216,4 +216,26 @@ class TicketClientSpec extends Z4jSpec {
         where:
         [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { !it.shouldSucceed }
     }
+
+    def "calling listTicketIncidents() succeeds when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        when:
+        client.listTicketIncidents(tickets.get(0).getId()).block()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { it.shouldSucceed }
+    }
+
+    def "calling listTicketIncidents() fails when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        when:
+        client.listTicketIncidents(tickets.get(0).getId()).block()
+
+        then:
+        thrown(HttpClientException)
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { !it.shouldSucceed }
+    }
 }
