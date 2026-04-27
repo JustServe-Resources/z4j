@@ -238,4 +238,53 @@ class TicketClientSpec extends Z4jSpec {
         where:
         [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { !it.shouldSucceed }
     }
+
+    def "calling showTickets() succeeds when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        given:
+        Long ticketId1 = tickets.get(0).getId()
+        Long ticketId2 = tickets.get(1).getId()
+        String commaSeparatedIds = "${ticketId1}, ${ticketId2}" // Send at least two tickets that are in the system
+
+        when:
+        client.showTickets(commaSeparatedIds).block()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { it.shouldSucceed }
+    }
+
+    def "calling showTickets() fails when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        given:
+        Long ticketId1 = tickets.get(0).getId()
+        Long ticketId2 = tickets.get(1).getId()
+        String commaSeparatedIds = "${ticketId1}, ${ticketId2}" // Send at least two tickets that are in the system
+
+        when:
+        client.showTickets(commaSeparatedIds).block()
+
+        then:
+        thrown(HttpClientException)
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { !it.shouldSucceed }
+    }
+
+    def "calling showTickets() should return an empty list when given ids for tickets that do not exist"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        given:
+        Long invalidTicketId1 = Long.MAX_VALUE
+        Long invalidTicketId2 = Long.MAX_VALUE - 1
+        String commaSeparatedIds = "${invalidTicketId1}, ${invalidTicketId2}"
+
+        when:
+        TicketsResponse response = client.showTickets(commaSeparatedIds).block()
+
+        then:
+        response.getTickets().isEmpty()
+        noExceptionThrown()
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { it.shouldSucceed }
+    }
 }

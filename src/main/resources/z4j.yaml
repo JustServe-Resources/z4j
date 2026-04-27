@@ -231,7 +231,7 @@ paths:
                 $ref: '#/components/schemas/JobStatusResponse'
   /api/v2/tickets/show_many:
     get:
-      operationId: TicketsShowMany
+      operationId: ShowTickets
       tags:
         - Ticket
       summary: Show Multiple Tickets
@@ -272,25 +272,6 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/TicketResponse'
-    put:
-      operationId: UpdateTicket
-      tags:
-        - Ticket
-      summary: Update Ticket
-      parameters:
-        - $ref: '#/components/parameters/TicketId'
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/TicketUpdateRequest'
-      responses:
-        "200":
-          description: Successful request
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/TicketUpdateResponse'
   /api/v2/tickets/{ticket_id}/email_ccs:
     get:
       operationId: ListTicketEmailCCs
@@ -315,6 +296,25 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ListTicketEmailCCsResponse'
+    put:
+      operationId: UpdateTicket
+      tags:
+        - Ticket
+      summary: Update Ticket
+      parameters:
+        - $ref: '#/components/parameters/TicketId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TicketUpdateRequest'
+      responses:
+        "200":
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TicketUpdateResponse'
   /api/v2/tickets/{ticket_id}/incidents:
     get:
       operationId: ListTicketIncidents
