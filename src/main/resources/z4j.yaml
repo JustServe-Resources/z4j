@@ -206,9 +206,9 @@ paths:
                 $ref: '#/components/schemas/TicketCountResponse'
   /api/v2/tickets/create_many:
     post:
-      operationId: TicketsCreateMany
+      operationId: CreateTickets
       tags:
-        - Tickets
+        - Ticket
       summary: Create Many Tickets
       description: |-
         <p>Accepts an array of up to 100 ticket objects. <strong>Note</strong>: Every ticket created with this endpoint may be affected by your business rules, which can include sending email notifications to your end users. If you are importing historical tickets or creating more than 1000 tickets, consider using the <a href="/api-reference/ticketing/tickets/ticket_import/#ticket-bulk-import">Ticket Bulk Import</a> endpoint.</p>
