@@ -3,6 +3,7 @@ on:
   pull_request:
     branches:
       - "main"
+      - "Ticket-Feature"
       - "[0-9]+.[0-9]+.[0-9]+" # release branches
 jobs:
   build-and-analyze:
@@ -33,7 +34,7 @@ jobs:
         if: ${{ github.event.pull_request.base.ref != 'main' && github.event.action != 'closed' }}
         run: ./gradlew build
       - name: Sonar Scan
-        if: ${{ github.event.pull_request.base.ref == 'main' && github.event.action != 'closed' }} # Only run SonarQube on PRs to main
+        if: ${{ github.event.action != 'closed' }}
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: ./gradlew build sonar
