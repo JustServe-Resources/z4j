@@ -1,0 +1,9 @@
+micronaut:
+  application:
+    name: z4j
+  http:
+    services:
+      zendesk:
+        url: ${:Z4J_URL}
+        email: ${:Z4J_EMAIL}
+        token: ${:Z4J_TOKEN}
