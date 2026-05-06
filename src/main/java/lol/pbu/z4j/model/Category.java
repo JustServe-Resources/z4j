@@ -34,6 +34,7 @@ import java.time.ZonedDateTime;
  *
  * @author Jonathan-Zollinger
  * @since 0.1.1
+ * @see Section
  */
 @Accessors(chain = true)
 @EqualsAndHashCode
