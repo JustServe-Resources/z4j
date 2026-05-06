@@ -37,6 +37,7 @@ import java.util.List;
  *
  * @author Jonathan-Zollinger
  * @since 0.1.1
+ * @see TicketCreateRequest
  */
 @Accessors(chain = true)
 @NoArgsConstructor

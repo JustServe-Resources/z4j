@@ -30,6 +30,7 @@ import lombok.experimental.Accessors;
  *
  * @author Jonathan-Zollinger
  * @since 0.1.1
+ * @see Attachment
  */
 @Accessors(chain = true)
 @NoArgsConstructor
