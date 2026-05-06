@@ -33,7 +33,7 @@ import lombok.experimental.Accessors;
  * @since 0.1.1
  */
 @Accessors(chain = true)
-@EqualsAndHashCode
+@EqualsAndHashCode(callSuper = false)
 @ToString
 @Getter
 @Setter
