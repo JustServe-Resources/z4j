@@ -56,9 +56,20 @@ import lombok.experimental.Accessors;
 @Serdeable
 public class Section extends Category {
 
+    public static final String JSON_PROPERTY_LOCALE = "locale";
+    public static final String JSON_PROPERTY_NAME = "name";
     public static final String JSON_PROPERTY_CATEGORY_ID = "category_id";
+    public static final String JSON_PROPERTY_CREATED_AT = "created_at";
+    public static final String JSON_PROPERTY_DESCRIPTION = "description";
+    public static final String JSON_PROPERTY_HTML_URL = "html_url";
+    public static final String JSON_PROPERTY_ID = "id";
+    public static final String JSON_PROPERTY_OUTDATED = "outdated";
     public static final String JSON_PROPERTY_PARENT_SECTION_ID = "parent_section_id";
+    public static final String JSON_PROPERTY_POSITION = "position";
+    public static final String JSON_PROPERTY_SOURCE_LOCALE = "source_locale";
     public static final String JSON_PROPERTY_THEME_TEMPLATE = "theme_template";
+    public static final String JSON_PROPERTY_UPDATED_AT = "updated_at";
+    public static final String JSON_PROPERTY_URL = "url";
 
     /**
      * The id of the category to which this section belongs

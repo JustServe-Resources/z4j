@@ -82,6 +82,30 @@ import java.util.List;
 @Serdeable
 public class TicketCreateInput extends TicketUpdateInput {
 
+    public static final String JSON_PROPERTY_COMMENT = "comment";
+    public static final String JSON_PROPERTY_ADDITIONAL_COLLABORATORS = "additional_collaborators";
+    public static final String JSON_PROPERTY_ASSIGNEE_EMAIL = "assignee_email";
+    public static final String JSON_PROPERTY_ASSIGNEE_ID = "assignee_id";
+    public static final String JSON_PROPERTY_ATTRIBUTE_VALUE_IDS = "attribute_value_ids";
+    public static final String JSON_PROPERTY_COLLABORATOR_IDS = "collaborator_ids";
+    public static final String JSON_PROPERTY_CUSTOM_FIELDS = "custom_fields";
+    public static final String JSON_PROPERTY_CUSTOM_STATUS_ID = "custom_status_id";
+    public static final String JSON_PROPERTY_DUE_AT = "due_at";
+    public static final String JSON_PROPERTY_EMAIL_CCS = "email_ccs";
+    public static final String JSON_PROPERTY_EXTERNAL_ID = "external_id";
+    public static final String JSON_PROPERTY_FOLLOWERS = "followers";
+    public static final String JSON_PROPERTY_GROUP_ID = "group_id";
+    public static final String JSON_PROPERTY_ORGANIZATION_ID = "organization_id";
+    public static final String JSON_PROPERTY_PRIORITY = "priority";
+    public static final String JSON_PROPERTY_PROBLEM_ID = "problem_id";
+    public static final String JSON_PROPERTY_REQUESTER_ID = "requester_id";
+    public static final String JSON_PROPERTY_SAFE_UPDATE = "safe_update";
+    public static final String JSON_PROPERTY_SHARING_AGREEMENT_IDS = "sharing_agreement_ids";
+    public static final String JSON_PROPERTY_STATUS = "status";
+    public static final String JSON_PROPERTY_SUBJECT = "subject";
+    public static final String JSON_PROPERTY_TAGS = "tags";
+    public static final String JSON_PROPERTY_TYPE = "type";
+    public static final String JSON_PROPERTY_UPDATED_STAMP = "updated_stamp";
     public static final String JSON_PROPERTY_BRAND_ID = "brand_id";
     public static final String JSON_PROPERTY_COLLABORATORS = "collaborators";
     public static final String JSON_PROPERTY_EMAIL_CC_IDS = "email_cc_ids";

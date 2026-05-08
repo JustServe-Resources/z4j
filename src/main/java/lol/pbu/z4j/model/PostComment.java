@@ -55,8 +55,19 @@ import lombok.experimental.Accessors;
 @Serdeable
 public class PostComment extends AbstractComment implements SearchResultsInner {
 
+    public static final String JSON_PROPERTY_BODY = "body";
+    public static final String JSON_PROPERTY_AUTHOR_ID = "author_id";
+    public static final String JSON_PROPERTY_CREATED_AT = "created_at";
+    public static final String JSON_PROPERTY_HTML_URL = "html_url";
+    public static final String JSON_PROPERTY_ID = "id";
+    public static final String JSON_PROPERTY_NON_AUTHOR_EDITOR_ID = "non_author_editor_id";
+    public static final String JSON_PROPERTY_NON_AUTHOR_UPDATED_AT = "non_author_updated_at";
     public static final String JSON_PROPERTY_OFFICIAL = "official";
     public static final String JSON_PROPERTY_POST_ID = "post_id";
+    public static final String JSON_PROPERTY_UPDATED_AT = "updated_at";
+    public static final String JSON_PROPERTY_URL = "url";
+    public static final String JSON_PROPERTY_VOTE_COUNT = "vote_count";
+    public static final String JSON_PROPERTY_VOTE_SUM = "vote_sum";
 
     /**
      * Whether the comment is marked as official

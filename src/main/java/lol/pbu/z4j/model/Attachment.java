@@ -59,6 +59,19 @@ import java.util.List;
 @Serdeable
 public class Attachment extends AttachmentBase {
 
+    public static final String JSON_PROPERTY_CONTENT_TYPE = "content_type";
+    public static final String JSON_PROPERTY_CONTENT_URL = "content_url";
+    public static final String JSON_PROPERTY_DELETED = "deleted";
+    public static final String JSON_PROPERTY_FILE_NAME = "file_name";
+    public static final String JSON_PROPERTY_HEIGHT = "height";
+    public static final String JSON_PROPERTY_ID = "id";
+    public static final String JSON_PROPERTY_INLINE = "inline";
+    public static final String JSON_PROPERTY_MALWARE_ACCESS_OVERRIDE = "malware_access_override";
+    public static final String JSON_PROPERTY_MALWARE_SCAN_RESULT = "malware_scan_result";
+    public static final String JSON_PROPERTY_MAPPED_CONTENT_URL = "mapped_content_url";
+    public static final String JSON_PROPERTY_SIZE = "size";
+    public static final String JSON_PROPERTY_URL = "url";
+    public static final String JSON_PROPERTY_WIDTH = "width";
     public static final String JSON_PROPERTY_THUMBNAILS = "thumbnails";
 
     /**

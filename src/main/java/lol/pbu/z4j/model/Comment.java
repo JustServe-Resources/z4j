@@ -57,9 +57,20 @@ import lombok.experimental.Accessors;
 @Serdeable
 public class Comment extends AbstractComment {
 
+    public static final String JSON_PROPERTY_BODY = "body";
     public static final String JSON_PROPERTY_LOCALE = "locale";
+    public static final String JSON_PROPERTY_AUTHOR_ID = "author_id";
+    public static final String JSON_PROPERTY_CREATED_AT = "created_at";
+    public static final String JSON_PROPERTY_HTML_URL = "html_url";
+    public static final String JSON_PROPERTY_ID = "id";
+    public static final String JSON_PROPERTY_NON_AUTHOR_EDITOR_ID = "non_author_editor_id";
+    public static final String JSON_PROPERTY_NON_AUTHOR_UPDATED_AT = "non_author_updated_at";
     public static final String JSON_PROPERTY_SOURCE_ID = "source_id";
     public static final String JSON_PROPERTY_SOURCE_TYPE = "source_type";
+    public static final String JSON_PROPERTY_UPDATED_AT = "updated_at";
+    public static final String JSON_PROPERTY_URL = "url";
+    public static final String JSON_PROPERTY_VOTE_COUNT = "vote_count";
+    public static final String JSON_PROPERTY_VOTE_SUM = "vote_sum";
 
     /**
      * The locale in which this comment was made
