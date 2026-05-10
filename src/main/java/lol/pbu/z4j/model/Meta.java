@@ -17,19 +17,25 @@ package lol.pbu.z4j.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-@Getter
+/**
+ * Meta response found in cursor paginated responses.
+ *
+ * @author Jonathan-Zollinger
+ * @since 0.1.4
+ */
+@Data
+@EqualsAndHashCode
 @Accessors(chain = true)
-@AllArgsConstructor
-@NoArgsConstructor
 @Serdeable
-public class JobStatusResponse {
-
-    @JsonProperty("job_status")
-    private JobStatus jobStatus;
-
+public class Meta {
+    @JsonProperty("has_more")
+    private Boolean hasMore;
+    @JsonProperty("after_cursor")
+    private String afterCursor;
+    @JsonProperty("before_cursor")
+    private String beforeCursor;
 }

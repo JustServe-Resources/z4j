@@ -15,21 +15,35 @@
  */
 package lol.pbu.z4j.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.Accessors;
 
 @Getter
+@Setter
 @Accessors(chain = true)
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
 @Serdeable
-public class JobStatusResponse {
+public class UpdateResourceResult extends JobStatus {
+    /**
+     * the action the job attempted ({@code "action": "update"})
+     */
+    private String action;
 
-    @JsonProperty("job_status")
-    private JobStatus jobStatus;
+    /**
+     * the id of the resource the job attempted to update
+     */
+    private Integer id;
 
+    /**
+     * the status ({@code "status": "Updated"})
+     */
+    private String status;
+
+    /**
+     * whether the action was successful or not ({@code "success": true})
+     */
+    private boolean success;
 }

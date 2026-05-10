@@ -15,21 +15,14 @@
  */
 package lol.pbu.z4j.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
 
-@Getter
-@Accessors(chain = true)
-@AllArgsConstructor
-@NoArgsConstructor
+/**
+ * One of the zendesk objects which can be exported from /api/v2/search/export
+ *
+ * @author Jonathan-Zollinger
+ * @since 0.1.4
+ */
 @Serdeable
-public class JobStatusResponse {
-
-    @JsonProperty("job_status")
-    private JobStatus jobStatus;
-
+public interface Exportable {
 }

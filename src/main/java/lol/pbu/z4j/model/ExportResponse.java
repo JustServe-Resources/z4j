@@ -15,21 +15,20 @@
  */
 package lol.pbu.z4j.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
-@Getter
+import java.util.List;
+
+@Data
 @Accessors(chain = true)
-@AllArgsConstructor
-@NoArgsConstructor
+@EqualsAndHashCode
 @Serdeable
-public class JobStatusResponse {
-
-    @JsonProperty("job_status")
-    private JobStatus jobStatus;
-
+public class ExportResponse<T> {
+    private List<T> results;
+    private String facets;
+    private Meta meta;
+    private Links links;
 }
