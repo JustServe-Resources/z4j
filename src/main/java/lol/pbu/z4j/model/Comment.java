@@ -20,10 +20,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
-import jakarta.validation.constraints.NotNull;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
@@ -34,50 +32,30 @@ import lombok.experimental.Accessors;
  * @since 0.1.1
  */
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @ToString
-@Getter
-@Setter
+@Data
 @JsonPropertyOrder({
-        Comment.JSON_PROPERTY_BODY,
-        Comment.JSON_PROPERTY_LOCALE,
-        Comment.JSON_PROPERTY_AUTHOR_ID,
-        Comment.JSON_PROPERTY_CREATED_AT,
-        Comment.JSON_PROPERTY_HTML_URL,
-        Comment.JSON_PROPERTY_ID,
-        Comment.JSON_PROPERTY_NON_AUTHOR_EDITOR_ID,
-        Comment.JSON_PROPERTY_NON_AUTHOR_UPDATED_AT,
+        CommentBase.JSON_PROPERTY_BODY,
+        CommentBase.JSON_PROPERTY_LOCALE,
+        CommentBase.JSON_PROPERTY_AUTHOR_ID,
+        CommentBase.JSON_PROPERTY_CREATED_AT,
+        CommentBase.JSON_PROPERTY_HTML_URL,
+        CommentBase.JSON_PROPERTY_ID,
+        CommentBase.JSON_PROPERTY_NON_AUTHOR_EDITOR_ID,
+        CommentBase.JSON_PROPERTY_NON_AUTHOR_UPDATED_AT,
         Comment.JSON_PROPERTY_SOURCE_ID,
         Comment.JSON_PROPERTY_SOURCE_TYPE,
-        Comment.JSON_PROPERTY_UPDATED_AT,
-        Comment.JSON_PROPERTY_URL,
-        Comment.JSON_PROPERTY_VOTE_COUNT,
-        Comment.JSON_PROPERTY_VOTE_SUM,
+        CommentBase.JSON_PROPERTY_UPDATED_AT,
+        CommentBase.JSON_PROPERTY_URL,
+        CommentBase.JSON_PROPERTY_VOTE_COUNT,
+        CommentBase.JSON_PROPERTY_VOTE_SUM,
 })
 @Serdeable
-public class Comment extends AbstractComment {
+public class Comment extends CommentBase {
 
-    public static final String JSON_PROPERTY_BODY = "body";
-    public static final String JSON_PROPERTY_LOCALE = "locale";
-    public static final String JSON_PROPERTY_AUTHOR_ID = "author_id";
-    public static final String JSON_PROPERTY_CREATED_AT = "created_at";
-    public static final String JSON_PROPERTY_HTML_URL = "html_url";
-    public static final String JSON_PROPERTY_ID = "id";
-    public static final String JSON_PROPERTY_NON_AUTHOR_EDITOR_ID = "non_author_editor_id";
-    public static final String JSON_PROPERTY_NON_AUTHOR_UPDATED_AT = "non_author_updated_at";
     public static final String JSON_PROPERTY_SOURCE_ID = "source_id";
     public static final String JSON_PROPERTY_SOURCE_TYPE = "source_type";
-    public static final String JSON_PROPERTY_UPDATED_AT = "updated_at";
-    public static final String JSON_PROPERTY_URL = "url";
-    public static final String JSON_PROPERTY_VOTE_COUNT = "vote_count";
-    public static final String JSON_PROPERTY_VOTE_SUM = "vote_sum";
-
-    /**
-     * The locale in which this comment was made
-     */
-    @NotNull
-    @JsonProperty(JSON_PROPERTY_LOCALE)
-    private LocaleAbbreviation localeAbbreviation;
 
     /**
      * The id of the item on which this comment was made
@@ -94,5 +72,9 @@ public class Comment extends AbstractComment {
     @JsonProperty(JSON_PROPERTY_SOURCE_TYPE)
     @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
     private String sourceType;
+
+    public Comment(String body) {
+        setBody(body);
+    }
 
 }

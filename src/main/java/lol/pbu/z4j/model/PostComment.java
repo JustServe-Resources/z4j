@@ -20,9 +20,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
@@ -33,41 +32,29 @@ import lombok.experimental.Accessors;
  * @since 0.1.1
  */
 @Accessors(chain = true)
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(callSuper = true)
 @ToString
-@Getter
-@Setter
+@Data
 @JsonPropertyOrder({
-        PostComment.JSON_PROPERTY_BODY,
-        PostComment.JSON_PROPERTY_AUTHOR_ID,
-        PostComment.JSON_PROPERTY_CREATED_AT,
-        PostComment.JSON_PROPERTY_HTML_URL,
-        PostComment.JSON_PROPERTY_ID,
-        PostComment.JSON_PROPERTY_NON_AUTHOR_EDITOR_ID,
-        PostComment.JSON_PROPERTY_NON_AUTHOR_UPDATED_AT,
+        CommentBase.JSON_PROPERTY_BODY,
+        CommentBase.JSON_PROPERTY_AUTHOR_ID,
+        CommentBase.JSON_PROPERTY_CREATED_AT,
+        CommentBase.JSON_PROPERTY_HTML_URL,
+        CommentBase.JSON_PROPERTY_ID,
+        CommentBase.JSON_PROPERTY_NON_AUTHOR_EDITOR_ID,
+        CommentBase.JSON_PROPERTY_NON_AUTHOR_UPDATED_AT,
         PostComment.JSON_PROPERTY_OFFICIAL,
         PostComment.JSON_PROPERTY_POST_ID,
-        PostComment.JSON_PROPERTY_UPDATED_AT,
-        PostComment.JSON_PROPERTY_URL,
-        PostComment.JSON_PROPERTY_VOTE_COUNT,
-        PostComment.JSON_PROPERTY_VOTE_SUM,
+        CommentBase.JSON_PROPERTY_UPDATED_AT,
+        CommentBase.JSON_PROPERTY_URL,
+        CommentBase.JSON_PROPERTY_VOTE_COUNT,
+        CommentBase.JSON_PROPERTY_VOTE_SUM,
 })
 @Serdeable
-public class PostComment extends AbstractComment implements SearchResultsInner {
+public class PostComment extends CommentBase implements SearchResultsInner {
 
-    public static final String JSON_PROPERTY_BODY = "body";
-    public static final String JSON_PROPERTY_AUTHOR_ID = "author_id";
-    public static final String JSON_PROPERTY_CREATED_AT = "created_at";
-    public static final String JSON_PROPERTY_HTML_URL = "html_url";
-    public static final String JSON_PROPERTY_ID = "id";
-    public static final String JSON_PROPERTY_NON_AUTHOR_EDITOR_ID = "non_author_editor_id";
-    public static final String JSON_PROPERTY_NON_AUTHOR_UPDATED_AT = "non_author_updated_at";
     public static final String JSON_PROPERTY_OFFICIAL = "official";
     public static final String JSON_PROPERTY_POST_ID = "post_id";
-    public static final String JSON_PROPERTY_UPDATED_AT = "updated_at";
-    public static final String JSON_PROPERTY_URL = "url";
-    public static final String JSON_PROPERTY_VOTE_COUNT = "vote_count";
-    public static final String JSON_PROPERTY_VOTE_SUM = "vote_sum";
 
     /**
      * Whether the comment is marked as official
@@ -84,6 +71,7 @@ public class PostComment extends AbstractComment implements SearchResultsInner {
     @JsonProperty(JSON_PROPERTY_POST_ID)
     @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
     private Long postId;
+
 
     public PostComment(String body) {
         setBody(body);

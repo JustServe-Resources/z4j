@@ -35,43 +35,31 @@ import java.util.List;
  * @author Jonathan-Zollinger
  * @since 0.1.1
  */
+@EqualsAndHashCode(callSuper = true)
 @Accessors(chain = true)
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
 @EqualsAndHashCode(callSuper = false)
 @JsonPropertyOrder({
-        Attachment.JSON_PROPERTY_CONTENT_TYPE,
-        Attachment.JSON_PROPERTY_CONTENT_URL,
-        Attachment.JSON_PROPERTY_DELETED,
-        Attachment.JSON_PROPERTY_FILE_NAME,
-        Attachment.JSON_PROPERTY_HEIGHT,
-        Attachment.JSON_PROPERTY_ID,
-        Attachment.JSON_PROPERTY_INLINE,
-        Attachment.JSON_PROPERTY_MALWARE_ACCESS_OVERRIDE,
-        Attachment.JSON_PROPERTY_MALWARE_SCAN_RESULT,
-        Attachment.JSON_PROPERTY_MAPPED_CONTENT_URL,
-        Attachment.JSON_PROPERTY_SIZE,
-        Attachment.JSON_PROPERTY_URL,
-        Attachment.JSON_PROPERTY_WIDTH,
+        AttachmentBase.JSON_PROPERTY_CONTENT_TYPE,
+        AttachmentBase.JSON_PROPERTY_CONTENT_URL,
+        AttachmentBase.JSON_PROPERTY_DELETED,
+        AttachmentBase.JSON_PROPERTY_FILE_NAME,
+        AttachmentBase.JSON_PROPERTY_HEIGHT,
+        AttachmentBase.JSON_PROPERTY_ID,
+        AttachmentBase.JSON_PROPERTY_INLINE,
+        AttachmentBase.JSON_PROPERTY_MALWARE_ACCESS_OVERRIDE,
+        AttachmentBase.JSON_PROPERTY_MALWARE_SCAN_RESULT,
+        AttachmentBase.JSON_PROPERTY_MAPPED_CONTENT_URL,
+        AttachmentBase.JSON_PROPERTY_SIZE,
+        AttachmentBase.JSON_PROPERTY_URL,
+        AttachmentBase.JSON_PROPERTY_WIDTH,
         Attachment.JSON_PROPERTY_THUMBNAILS,
 })
 @Serdeable
 public class Attachment extends AttachmentBase {
 
-    public static final String JSON_PROPERTY_CONTENT_TYPE = "content_type";
-    public static final String JSON_PROPERTY_CONTENT_URL = "content_url";
-    public static final String JSON_PROPERTY_DELETED = "deleted";
-    public static final String JSON_PROPERTY_FILE_NAME = "file_name";
-    public static final String JSON_PROPERTY_HEIGHT = "height";
-    public static final String JSON_PROPERTY_ID = "id";
-    public static final String JSON_PROPERTY_INLINE = "inline";
-    public static final String JSON_PROPERTY_MALWARE_ACCESS_OVERRIDE = "malware_access_override";
-    public static final String JSON_PROPERTY_MALWARE_SCAN_RESULT = "malware_scan_result";
-    public static final String JSON_PROPERTY_MAPPED_CONTENT_URL = "mapped_content_url";
-    public static final String JSON_PROPERTY_SIZE = "size";
-    public static final String JSON_PROPERTY_URL = "url";
-    public static final String JSON_PROPERTY_WIDTH = "width";
     public static final String JSON_PROPERTY_THUMBNAILS = "thumbnails";
 
     /**
