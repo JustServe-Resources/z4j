@@ -61,7 +61,7 @@ public interface TicketClient {
      * @return Create many tickets (status code 200)
      */
     @Post("/api/v2/tickets/create_many")
-    Mono<@Valid JobStatusResponse> createTickets(@Body @Nullable @Valid TicketsCreateRequest ticketsCreateRequest);
+    Mono<@Valid JobStatusResponse> createManyTickets(@Body @Nullable @Valid TicketsCreateRequest ticketsCreateRequest);
 
     /**
      * <h1>{@summary Create Custom Ticket Field}</h1>

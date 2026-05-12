@@ -217,7 +217,7 @@ class TicketClientSpec extends Z4jSpec {
         TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest(ticketCreateInputList)
 
         when:
-        client.createTickets(createTicketsRequest).block()
+        client.createManyTickets(createTicketsRequest).block()
 
         then:
         noExceptionThrown()
@@ -238,7 +238,7 @@ class TicketClientSpec extends Z4jSpec {
         TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest(ticketCreateInputList)
 
         when:
-        client.createTickets(createTicketsRequest).block()
+        client.createManyTickets(createTicketsRequest).block()
 
         then:
         thrown(HttpClientException)
@@ -259,7 +259,7 @@ class TicketClientSpec extends Z4jSpec {
         TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest(ticketCreateInputList)
 
         when:
-        client.createTickets(createTicketsRequest).block()
+        client.createManyTickets(createTicketsRequest).block()
 
         then:
         thrown(HttpClientException)
