@@ -42,6 +42,6 @@ public class JobStatusResponse {
     @Valid
     @JsonProperty(JSON_PROPERTY_JOB_STATUS)
     @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
-    private JobStatusObject jobStatus;
+    private JobStatus jobStatus;
 
 }
