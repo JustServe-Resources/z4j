@@ -93,7 +93,7 @@ public class JobStatus {
     private JobStatusResults results;
 
     /**
-     * The current status. One of the following: \"queued\", \"working\", \"failed\", \"completed\"
+     * The current status. See {@link JobStatusEnum}
      */
     @Nullable
     @JsonProperty(JSON_PROPERTY_STATUS)
