@@ -98,7 +98,7 @@ public class JobStatus {
     @Nullable
     @JsonProperty(JSON_PROPERTY_STATUS)
     @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
-    private String status;
+    private JobStatusEnum status;
 
     /**
      * The total number of tasks this job is batching through
