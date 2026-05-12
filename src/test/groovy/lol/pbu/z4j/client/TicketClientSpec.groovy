@@ -207,14 +207,10 @@ class TicketClientSpec extends Z4jSpec {
 
     def "calling createTickets() succeeds when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
         given:
-        List<TicketCreateInput> ticketCreateInputList = new ArrayList<>()
-        for (int i = 0; i < 100; i++) {
-            TicketComment ticketComment = new TicketComment().setBody(faker.chuckNorris().fact())
-            TicketCreateInput createTicketInput = new TicketCreateInput(ticketComment)
-            createTicketInput.setRawSubject(faker.chuckNorris().fact())
-            ticketCreateInputList.add(createTicketInput)
+        List<TicketCreateInput> inputs = (1..100).collect {
+            new TicketCreateInput(new TicketComment().setBody(faker.chuckNorris().fact())).setRawSubject(faker.book().title())
         }
-        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest(ticketCreateInputList)
+        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest().setTickets(inputs)
 
         when:
         client.createManyTickets(createTicketsRequest).block()
@@ -228,14 +224,10 @@ class TicketClientSpec extends Z4jSpec {
 
     def "calling createTickets() fails when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
         given:
-        List<TicketCreateInput> ticketCreateInputList = new ArrayList<>()
-        for (int i = 0; i < 100; i++) {
-            TicketComment ticketComment = new TicketComment().setBody(faker.chuckNorris().fact())
-            TicketCreateInput createTicketInput = new TicketCreateInput(ticketComment)
-            createTicketInput.setRawSubject(faker.chuckNorris().fact())
-            ticketCreateInputList.add(createTicketInput)
+        List<TicketCreateInput> inputs = (1..100).collect {
+            new TicketCreateInput(new TicketComment().setBody(faker.chuckNorris().fact())).setRawSubject(faker.book().title())
         }
-        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest(ticketCreateInputList)
+        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest().setTickets(inputs)
 
         when:
         client.createManyTickets(createTicketsRequest).block()
@@ -249,14 +241,10 @@ class TicketClientSpec extends Z4jSpec {
 
     def "calling createTickets() fails when trying to create more than the maximum amount(100) of tickets, even when using the correct client"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
         given:
-        List<TicketCreateInput> ticketCreateInputList = new ArrayList<>()
-        for (int i = 0; i < 101; i++) {
-            TicketComment ticketComment = new TicketComment().setBody(faker.chuckNorris().fact())
-            TicketCreateInput createTicketInput = new TicketCreateInput(ticketComment)
-            createTicketInput.setRawSubject(faker.chuckNorris().fact())
-            ticketCreateInputList.add(createTicketInput)
+        List<TicketCreateInput> inputs = (1..101).collect {
+            new TicketCreateInput(new TicketComment().setBody(faker.chuckNorris().fact())).setRawSubject(faker.book().title())
         }
-        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest(ticketCreateInputList)
+        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest().setTickets(inputs)
 
         when:
         client.createManyTickets(createTicketsRequest).block()
