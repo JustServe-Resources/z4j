@@ -54,10 +54,12 @@ public interface TicketClient {
 
     /**
      * {@summary Create Many Tickets}
-     * <p>Accepts an array of up to 100 ticket objects. <strong>Note</strong>: Every ticket created with this endpoint may be affected by your business rules, which can include sending email notifications to your end users. If you are importing historical tickets or creating more than 1000 tickets, consider using the <a href=\"/api-reference/ticketing/tickets/ticket_import/#ticket-bulk-import\">Ticket Bulk Import</a> endpoint.</p> <p>This endpoint returns a <code>job_status</code> <a href=\"/api-reference/ticketing/ticket-management/job_statuses/#json-format\">JSON object</a> and queues a background job to do the work. Use the <a href=\"/api-reference/ticketing/ticket-management/job_statuses/#show-job-status\">Show Job Status</a> endpoint to check for the job&#39;s completion. Only a certain number of jobs can be queued or running at the same time. See <a href=\"/api-reference/introduction/rate-limits/#job-limit\">Job limit</a> for more information.</p> <h4 id=\"allowed-for\">Allowed For</h4> <ul>   <li>Agents</li> </ul>
+     * Accepts an array of up to 100 ticket objects.
+     * Every ticket created with this endpoint may be affected by your business rules, which can include sending email notifications to your end users.
+     * <blockquote>NOTE: This endpoint starts a background job on the zendesk server. The returned object reports on this background job's status.</blockquote>
+     * <h4 id="allowed-for">Allowed For Agents</h4>
      *
      * @param ticketsCreateRequest (optional)
-     *
      * @return Create many tickets (status code 200)
      */
     @Post("/api/v2/tickets/create_many")
