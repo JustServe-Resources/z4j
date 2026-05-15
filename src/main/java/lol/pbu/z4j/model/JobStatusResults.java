@@ -15,33 +15,8 @@
  */
 package lol.pbu.z4j.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.Data;
-import lombok.experimental.Accessors;
-import com.fasterxml.jackson.annotation.*;
 import io.micronaut.serde.annotation.Serdeable;
-import jakarta.validation.Valid;
-import io.micronaut.core.annotation.Nullable;
 
-/**
- * JobStatusResponse
- * @author Kody Krauss
- */
-@Accessors(chain = true)
-@NoArgsConstructor
-@AllArgsConstructor
-@Data
-@JsonPropertyOrder(JobStatusResponse.JSON_PROPERTY_JOB_STATUS)
 @Serdeable
-public class JobStatusResponse {
-
-    public static final String JSON_PROPERTY_JOB_STATUS = "job_status";
-
-    @Nullable
-    @Valid
-    @JsonProperty(JSON_PROPERTY_JOB_STATUS)
-    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
-    private JobStatus jobStatus;
-
+public interface JobStatusResults {
 }

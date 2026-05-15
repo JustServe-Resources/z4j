@@ -15,10 +15,105 @@
  */
 package lol.pbu.z4j.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.Data;
+import lombok.experimental.Accessors;
+import com.fasterxml.jackson.annotation.*;
 import io.micronaut.serde.annotation.Serdeable;
-import lombok.EqualsAndHashCode;
+import jakarta.validation.Valid;
+import io.micronaut.core.annotation.Nullable;
 
-@EqualsAndHashCode
+/**
+ * JobStatusObject
+ * @author Kody Krauss
+ */
+@Accessors(chain = true)
+@NoArgsConstructor
+@AllArgsConstructor
+@Data
+@JsonPropertyOrder({
+        JobStatus.JSON_PROPERTY_ID,
+        JobStatus.JSON_PROPERTY_JOB_TYPE,
+        JobStatus.JSON_PROPERTY_MESSAGE,
+        JobStatus.JSON_PROPERTY_PROGRESS,
+        JobStatus.JSON_PROPERTY_RESULTS,
+        JobStatus.JSON_PROPERTY_STATUS,
+        JobStatus.JSON_PROPERTY_TOTAL,
+        JobStatus.JSON_PROPERTY_URL,
+})
 @Serdeable
 public class JobStatus {
+
+    public static final String JSON_PROPERTY_ID = "id";
+    public static final String JSON_PROPERTY_JOB_TYPE = "job_type";
+    public static final String JSON_PROPERTY_MESSAGE = "message";
+    public static final String JSON_PROPERTY_PROGRESS = "progress";
+    public static final String JSON_PROPERTY_RESULTS = "results";
+    public static final String JSON_PROPERTY_STATUS = "status";
+    public static final String JSON_PROPERTY_TOTAL = "total";
+    public static final String JSON_PROPERTY_URL = "url";
+
+    /**
+     * Automatically assigned when the job is queued
+     */
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_ID)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private String id;
+
+    /**
+     * The type of the job
+     */
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_JOB_TYPE)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private String jobType;
+
+    /**
+     * Message from the job worker, if any
+     */
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_MESSAGE)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private String message;
+
+    /**
+     * Number of tasks that have already been completed
+     */
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_PROGRESS)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private Integer progress;
+
+    @Nullable
+    @Valid
+    @JsonProperty(JSON_PROPERTY_RESULTS)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private JobStatusResults results;
+
+    /**
+     * The current status. See {@link JobStatusEnum}
+     */
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_STATUS)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private JobStatusEnum status;
+
+    /**
+     * The total number of tasks this job is batching through
+     */
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_TOTAL)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private Integer total;
+
+    /**
+     * The URL to poll for status updates
+     */
+    @Nullable
+    @JsonProperty(JSON_PROPERTY_URL)
+    @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
+    private String url;
+
 }

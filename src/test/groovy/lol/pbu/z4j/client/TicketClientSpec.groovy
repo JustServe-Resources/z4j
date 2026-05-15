@@ -204,5 +204,56 @@ class TicketClientSpec extends Z4jSpec {
                 clientTestMatrix.findAll { !it.shouldSucceed && it.clientType != "simple user"}, [true, false, null], accountLocales
         ].combinations()
     }
+
+    def "calling createTickets() succeeds when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        given:
+        List<TicketCreateInput> inputs = (1..100).collect {
+            new TicketCreateInput(new TicketComment().setBody(faker.chuckNorris().fact())).setRawSubject(faker.book().title())
+        }
+        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest().setTickets(inputs)
+
+        when:
+        client.createManyTickets(createTicketsRequest).block()
+
+        then:
+        noExceptionThrown()
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { it.shouldSucceed }
+    }
+
+    def "calling createTickets() fails when using a(n) #clientType"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        given:
+        List<TicketCreateInput> inputs = (1..100).collect {
+            new TicketCreateInput(new TicketComment().setBody(faker.chuckNorris().fact())).setRawSubject(faker.book().title())
+        }
+        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest().setTickets(inputs)
+
+        when:
+        client.createManyTickets(createTicketsRequest).block()
+
+        then:
+        thrown(HttpClientException)
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { !it.shouldSucceed }
+    }
+
+    def "calling createTickets() fails when trying to create more than the maximum amount(100) of tickets, even when using the correct client"(TicketClient client, String clientType, Boolean ignored, String alsoIgnored) {
+        given:
+        List<TicketCreateInput> inputs = (1..101).collect {
+            new TicketCreateInput(new TicketComment().setBody(faker.chuckNorris().fact())).setRawSubject(faker.book().title())
+        }
+        TicketsCreateRequest createTicketsRequest = new TicketsCreateRequest().setTickets(inputs)
+
+        when:
+        client.createManyTickets(createTicketsRequest).block()
+
+        then:
+        thrown(HttpClientException)
+
+        where:
+        [client, clientType, ignored, alsoIgnored] << clientTestMatrix.findAll { it.shouldSucceed }
+    }
 }
 
